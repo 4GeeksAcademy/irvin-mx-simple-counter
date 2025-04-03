@@ -9,13 +9,14 @@ const Counter = () => {
 
     //React hooks
     useEffect(()=> {
-        setInterval(()=>{
+        const id = setInterval(()=>{
            setCounterSeconds(prev => prev +1)
         },1000)
+
+        return ()=>clearInterval(id)
     },[])
 
      useEffect(()=> {
-        console.log(counterSeconds)
         setCounter(   counterSeconds.toString().padStart(4, "0").split("") )
              
      },[counterSeconds])
@@ -27,7 +28,7 @@ const Counter = () => {
             <div className="text-center border border-2  display-1 fw-semibold  bg-dark bg-gradient col-2 rounded text-white">{counter[1]}</div>
             <div className="text-center border border-2 display-1 fw-semibold  bg-dark bg-gradient col-2 rounded text-white">{counter[2]}</div>
             <div className="text-center border border-2 display-1 fw-semibold bg-dark bg-gradient col-2 rounded text-white">{counter[3]}</div>
-            <button  onClick={()=>setCounterSeconds(0)} type="button" class="btn btn-light">Reset</button>
+            <button  onClick={()=>setCounterSeconds(0)} type="button" className="btn btn-light">Reset</button>
         </div>
     )
 }
